@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:defaultValue="@string/order_by_default"
+        android:entries="@array/order_by_list_entries"
+        android:entryValues="@array/order_by_list_entry_values"
+        android:key="@string/order_by_key"
+        android:title="@string/order_by_list_title" />
+    <EditTextPreference
+        android:key="@string/movie_db_api_key"
+        android:title="@string/movie_db_api_key_title" />
+</PreferenceScreen>

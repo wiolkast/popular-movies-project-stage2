@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="order_by_list_entries">
+    <item>@string/order_by_popular_entry</item>
+    <item>@string/order_by_top_rated_entry</item>
+    <item>@string/order_by_favorite_entry</item>
+</string-array>
+<string-array name="order_by_list_entry_values">
+    <item>@string/order_by_popular_value</item>
+    <item>@string/order_by_top_rated_value</item>
+    <item>@string/order_by_favorite_value</item>
+</string-array>
+</resources>

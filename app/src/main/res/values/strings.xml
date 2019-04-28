@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="details_title">Movie details</string>
+    <string name="settings_title">Settings</string>
+
+    <string name="network_error_message">Failed to get results, please try again later.</string>
+    <string name="network_unauthorized_message">Invalid movie database API key.\n
+        You can request your own key from TMDb\n
+        (see: https://www.themoviedb.org/faq/api)\n
+        and add it in the app settings.</string>
+
+    <string name="release_date_title">Release date: </string>
+    <string name="vote_average_title">Vote average: </string>
+    <string name="trailers_title">Watch trailers:</string>
+    <string name="reviews_title">Reviews:</string>
+
+    <string name="menu_settings">Settings</string>
+    <string name="menu_credits">Credits</string>
+    <string name="credits_text">This product uses the TMDb API but is not endorsed or certified by TMDb.</string>
+
+    <string name="order_by_list_title">Order by</string>
+    <string name="order_by_key" translatable="false">sort_order</string>
+    <string name="order_by_default" translatable="false">popular</string>
+    <string name="order_by_popular_entry">Popular</string>
+    <string name="order_by_popular_value" translatable="false">popular</string>
+    <string name="order_by_top_rated_entry">Top rated</string>
+    <string name="order_by_top_rated_value" translatable="false">top_rated</string>
+    <string name="order_by_favorite_entry">Favorite</string>
+    <string name="order_by_favorite_value" translatable="false">favorite</string>
+
+    <string name="movie_db_api_key" translatable="false">movie_db_api_key</string>
+    <string name="movie_db_api_key_title">Movie Database API key</string>
+</resources>
