@@ -30,6 +30,9 @@ public class SettingsActivity extends AppCompatActivity {
                     setListPreferenceSummary((ListPreference) preference,
                             ((ListPreference) preference).getValue());
                 } else if (preference instanceof EditTextPreference) {
+                    if(((EditTextPreference) preference).getText()==null){
+                        ((EditTextPreference) preference).setText(BuildConfig.THE_MOVIE_DB_API_KEY);
+                    }
                     preference.setSummary(hideSummary(((EditTextPreference) preference).getText()));
                 }
             }

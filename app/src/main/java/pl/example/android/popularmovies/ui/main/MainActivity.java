@@ -22,6 +22,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.example.android.popularmovies.BuildConfig;
 import pl.example.android.popularmovies.R;
 import pl.example.android.popularmovies.SettingsActivity;
 import pl.example.android.popularmovies.database.MovieDatabase;
@@ -31,6 +32,7 @@ import pl.example.android.popularmovies.ui.detail.DetailActivity;
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private final static String defaultApiKey = BuildConfig.THE_MOVIE_DB_API_KEY;
     private final static int PICTURE_WIDTH_PIXELS = 342;
     private RecyclerView recyclerView;
     private TextView errorMessageTextView;
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 .getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
         String orderBy = sharedPreferences.getString(getString(R.string.order_by_key), getString(R.string.order_by_default));
-        String movieDbApiKey = sharedPreferences.getString(getString(R.string.movie_db_api_key), "");
+        String movieDbApiKey = sharedPreferences.getString(getString(R.string.movie_db_api_key), defaultApiKey);
 
         final MovieViewModelFactory factory = new MovieViewModelFactory(database, orderBy, movieDbApiKey);
         model = ViewModelProviders.of(this, factory).get(MovieViewModel.class);
@@ -161,9 +163,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if(key.equals(getString(R.string.order_by_key)) || key.equals(getString(R.string.movie_db_api_key))) {
+        if (key.equals(getString(R.string.order_by_key)) || key.equals(getString(R.string.movie_db_api_key))) {
             model.loadMovies(sharedPreferences.getString(getApplication().getString(R.string.order_by_key), getApplication().getString(R.string.order_by_default)),
-                    sharedPreferences.getString(getApplication().getString(R.string.movie_db_api_key),"")) ;
+                    sharedPreferences.getString(getApplication().getString(R.string.movie_db_api_key), defaultApiKey));
         }
     }
 }

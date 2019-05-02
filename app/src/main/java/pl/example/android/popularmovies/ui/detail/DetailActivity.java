@@ -2,6 +2,7 @@ package pl.example.android.popularmovies.ui.detail;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -22,12 +23,14 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.example.android.popularmovies.BuildConfig;
 import pl.example.android.popularmovies.R;
 import pl.example.android.popularmovies.database.MovieDatabase;
 import pl.example.android.popularmovies.model.Movie;
 
 public class DetailActivity extends AppCompatActivity implements TrailerAdapter.TrailerClickListener {
 
+    private final static String defaultApiKey = BuildConfig.THE_MOVIE_DB_API_KEY;
     private MovieDetailViewModel model;
     private Boolean isFavorite = false;
     private TrailerAdapter trailerAdapter;
@@ -67,7 +70,7 @@ public class DetailActivity extends AppCompatActivity implements TrailerAdapter.
 
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
-        String movieDbApiKey = sharedPreferences.getString(getString(R.string.movie_db_api_key), "");
+        String movieDbApiKey = sharedPreferences.getString(getString(R.string.movie_db_api_key), defaultApiKey);
 
         MovieDetailViewModelFactory factory = new MovieDetailViewModelFactory(database, movie.getMovieId(), movieDbApiKey);
         model = ViewModelProviders.of(this, factory).get(MovieDetailViewModel.class);
@@ -129,7 +132,12 @@ public class DetailActivity extends AppCompatActivity implements TrailerAdapter.
 
     @Override
     public void onTrailerClick(int itemId) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + trailerList.get(itemId).get(0)));
-        startActivity(intent);
+        Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + trailerList.get(itemId).get(0)));
+        Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + trailerList.get(itemId).get(0)));
+        try {
+            startActivity(appIntent);
+        } catch(ActivityNotFoundException e){
+            startActivity(webIntent);
+        }
     }
 }

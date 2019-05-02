@@ -51,17 +51,7 @@ public class MovieViewModel extends ViewModel {
     }
 
     public void loadMovies(final String orderBy, final String movieDbApiKey) {
-        if (orderBy.equals(FAVORITE_KEY)) {
-            status.setValue(Status.LOADING);
-            AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                @Override
-                public void run() {
-                    Log.d(LOG_TAG, "Loading movies from the local database");
-                        favorites = movieDao.loadAllMovies();
-                }
-            });
-            status.setValue(Status.SUCCESS);
-        } else {
+        if (!orderBy.equals(FAVORITE_KEY)) {
             status.setValue(Status.LOADING);
             AppExecutors.getInstance().networkIO().execute(new Runnable() {
                 @Override
@@ -81,6 +71,8 @@ public class MovieViewModel extends ViewModel {
                     }
                 }
             });
+        } else {
+            status.setValue(Status.SUCCESS);
         }
     }
 }
