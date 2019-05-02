@@ -2,7 +2,6 @@ package pl.example.android.popularmovies.ui.detail;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -134,9 +133,9 @@ public class DetailActivity extends AppCompatActivity implements TrailerAdapter.
     public void onTrailerClick(int itemId) {
         Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + trailerList.get(itemId).get(0)));
         Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + trailerList.get(itemId).get(0)));
-        try {
+        if (appIntent.resolveActivity(getPackageManager()) != null){
             startActivity(appIntent);
-        } catch(ActivityNotFoundException e){
+        } else if (webIntent.resolveActivity(getPackageManager()) != null){
             startActivity(webIntent);
         }
     }
