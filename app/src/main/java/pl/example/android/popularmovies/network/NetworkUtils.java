@@ -35,7 +35,7 @@ public class NetworkUtils {
     final private static String JSON_TRAILER_NAME = "name";
     final private static String JSON_REVIEW_AUTHOR = "author";
     final private static String JSON_REVIEW_CONTENT = "content";
-    final private static String POSTER_PATH_BASE = "http://image.tmdb.org/t/p/";
+    final private static String POSTER_PATH_BASE = "https://image.tmdb.org/t/p/";
     final private static String POSTER_SIZE_SMALL = "w185";
     final private static String POSTER_SIZE_LARGE = "w342";
     private static Boolean isConnectionUnauthorized = false;
